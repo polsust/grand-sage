@@ -1,8 +1,9 @@
-import { Events, MessageFlags } from "discord.js";
+import { createEvent } from "@types";
+import { MessageFlags } from "discord.js";
 import { ExtendedClient } from "index";
 
-export default {
-  name: Events.InteractionCreate,
+export default createEvent({
+  name: "interactionCreate",
   once: false,
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
@@ -34,4 +35,4 @@ export default {
       }
     }
   },
-};
+});

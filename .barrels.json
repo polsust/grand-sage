@@ -1,5 +1,6 @@
 {
   "directory": [
-    "./src/utils/"
+    "./src/utils/",
+    "./src/types/"
   ]
 }

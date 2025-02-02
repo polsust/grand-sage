@@ -1,8 +1,9 @@
+import { EventT } from "@types";
 import fs from "node:fs";
 import path from "node:path";
 
 export const getEvents = () => {
-  const events = new Set();
+  const events = new Set<EventT>();
 
   const eventsPath = path.join(process.cwd(), "src/events");
 
