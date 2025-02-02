@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "es2022",
+    "esModuleInterop": true,
+    "lib": [
+      "ES2017",
+      "ES2021.String",
+      "es2020"
+    ],
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "inlineSourceMap": true,
+    "types": [
+      "node"
+    ],
+    "baseUrl": "./src",
+    "paths": {
+      "@scripts/*": [
+        "./scripts/*"
+      ],
+      "@utils": [
+        "./utils/index.ts"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
