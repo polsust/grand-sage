@@ -9,7 +9,7 @@ type DeployModeT = "dev" | "global";
 if (!BOT_TOKEN || !BOT_APPLICATION_ID || !DEV_SERVER_ID)
   throw new Error("One or more env variables are missing!");
 
-const commands = getCommands().map((command) => command.data.toJSON());
+const commands = getCommands().map((command) => command.slashCommand.toJSON());
 
 const args = process.argv.slice(2);
 
