@@ -5,6 +5,7 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "tsx watch ./src/index.ts",
+    "lint": "eslint .",
     "deploy-commands": "tsx ./src/scripts/deployCommands.ts",
     "generate-barrels": "barrelsby --delete -c ./.barrels.json"
   },
