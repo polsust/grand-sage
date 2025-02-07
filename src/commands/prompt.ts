@@ -1,4 +1,3 @@
-import { CommandT } from "@types";
 import {
   CacheType,
   CommandInteractionOption,
@@ -6,8 +5,12 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import ollama from "ollama";
+import dayjs from "dayjs";
 
-const MAX_MESSAGE_LENGTH = 1950;
+import { CommandT } from "@types";
+
+const MAX_MSG_LENGTH = 2000;
+const MSG_LENGTH_MARGIN = 100;
 
 export default {
   slashCommand: new SlashCommandBuilder()
@@ -38,29 +41,41 @@ export default {
       stream: true,
     });
 
-    let currentMessage = "";
+    let ongoingMessageContent = "";
     let latestMessage: Message<boolean> | null = null;
+
+    let isDoneThinking = false;
 
     for await (const part of response) {
       const { content: aiContent } = part.message;
 
-      if ("\n" != aiContent || aiContent.trim() != "") {
-        if (currentMessage.length > MAX_MESSAGE_LENGTH && latestMessage) {
-          latestMessage = await latestMessage.reply(aiContent);
-
-          currentMessage = "";
-        } else {
-          const newContent = `${currentMessage}${aiContent}`;
-
-          if (latestMessage) {
-            latestMessage = await latestMessage.edit(newContent);
-          } else {
-            latestMessage = await interaction.editReply(newContent);
-          }
-        }
+      if (!isDoneThinking) {
+        if (aiContent.includes("</think>")) isDoneThinking = true;
+        continue;
       }
 
-      currentMessage += aiContent;
+      ongoingMessageContent += aiContent;
+
+      if (["\n", ""].includes(aiContent.trim()) && !part.done) continue;
+
+      if (!latestMessage) {
+        latestMessage = await interaction.editReply(aiContent);
+        continue;
+      }
+
+      const messageIsAlmostTooLong =
+        ongoingMessageContent.length > MAX_MSG_LENGTH - MSG_LENGTH_MARGIN;
+
+      if (messageIsAlmostTooLong) {
+        ongoingMessageContent = "";
+        latestMessage = await latestMessage.reply(aiContent);
+      } else if (
+        !latestMessage.editedAt ||
+        dayjs().diff(latestMessage.editedAt) > 1_000 ||
+        part.done
+      ) {
+        latestMessage = await latestMessage.edit(ongoingMessageContent);
+      }
     }
   },
 } as CommandT;
