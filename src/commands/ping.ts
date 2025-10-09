@@ -1,5 +1,5 @@
-import { CommandT } from "@types";
-import { SlashCommandBuilder } from "discord.js";
+import { CommandT } from "@types"
+import { SlashCommandBuilder } from "discord.js"
 
 export default {
   slashCommand: new SlashCommandBuilder()
@@ -7,6 +7,6 @@ export default {
     .setDescription("Replies with Pong!"),
 
   async execute(interaction) {
-    await interaction.reply("Pong! 🏓");
+    await interaction.reply("Pong! 🏓")
   },
-} as CommandT;
+} as CommandT

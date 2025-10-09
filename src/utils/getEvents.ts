@@ -1,23 +1,23 @@
-import { EventT } from "@types";
-import fs from "node:fs";
-import path from "node:path";
+import { EventT } from "@types"
+import fs from "node:fs"
+import path from "node:path"
 
 export const getEvents = () => {
-  const events = new Set<EventT>();
+  const events = new Set<EventT>()
 
-  const eventsPath = path.join(process.cwd(), "src/events");
+  const eventsPath = path.join(process.cwd(), "src/events")
 
   const eventFiles = fs
     .readdirSync(eventsPath)
-    .filter((file) => file.endsWith(".ts"));
+    .filter((file) => file.endsWith(".ts"))
 
   for (const file of eventFiles) {
-    const filePath = path.join(eventsPath, file);
+    const filePath = path.join(eventsPath, file)
 
-    const event = require(filePath).default;
+    const event = require(filePath).default
 
-    events.add(event);
+    events.add(event)
   }
 
-  return events;
-};
+  return events
+}
