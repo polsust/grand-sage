@@ -3,6 +3,9 @@ import "dotenv/config"
 
 import { getCommands, getEvents } from "@utils"
 import { CommandT } from "@types"
+import { setupCustom } from "utils/setupCustom"
+
+console.log("🚀 Starting...")
 
 export class ExtendedClient extends Client {
   public commands = new Collection<string, CommandT>()
