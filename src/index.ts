@@ -1,5 +1,3 @@
-
-
 import { Client, Collection, GatewayIntentBits } from "discord.js";
 import "dotenv/config";
 
