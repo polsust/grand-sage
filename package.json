@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.11.13",
-    "discord.js": "^14.17.3",
+    "discord.js": "^14.23.2",
     "dotenv": "^16.4.7",
     "node-cron": "^4.2.1",
     "ollama": "^0.5.12",
