@@ -2,7 +2,7 @@ import { EventT } from "@types"
 import fs from "node:fs"
 import path from "node:path"
 
-export const getEvents = () => {
+export const getEvents = async () => {
   const events = new Set<EventT>()
 
   const eventsPath = path.join(process.cwd(), "src/events")
@@ -14,7 +14,8 @@ export const getEvents = () => {
   for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file)
 
-    const event = require(filePath).default
+    const module = await import(filePath)
+    const event = module.default
 
     events.add(event)
   }

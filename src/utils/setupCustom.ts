@@ -5,14 +5,15 @@ import { CustomFunctionT } from "@types"
 
 const commandsDirPath = path.join(process.cwd(), "src/custom")
 
-export const setupCustom = (client: ExtendedClient) => {
+export const setupCustom = async (client: ExtendedClient) => {
   const files = fs
     .readdirSync(commandsDirPath)
     .filter((file) => file.endsWith(".ts"))
 
   for (const file of files) {
     const filePath = path.join(commandsDirPath, file)
-    const main = require(filePath).default as CustomFunctionT
+    const module = await import(filePath)
+    const main = module.default as CustomFunctionT
 
     main(client)
   }

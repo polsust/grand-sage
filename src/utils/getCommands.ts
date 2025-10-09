@@ -6,7 +6,7 @@ import { CommandT } from "@types"
 
 const commandsDirPath = path.join(process.cwd(), "src/commands")
 
-export const getCommands = () => {
+export const getCommands = async () => {
   const commands = new Collection<string, CommandT>()
 
   const commandFiles = fs
@@ -15,7 +15,8 @@ export const getCommands = () => {
 
   for (const file of commandFiles) {
     const filePath = path.join(commandsDirPath, file)
-    const command = require(filePath).default
+    const module = await import(filePath)
+    const command = module.default
 
     if ("slashCommand" in command && "execute" in command) {
       commands.set(command.slashCommand.name, command)

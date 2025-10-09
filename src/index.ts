@@ -20,14 +20,14 @@ const client = new ExtendedClient({
   partials: [Partials.Channel, Partials.Message],
 })
 
-client.commands = getCommands()
+client.commands = await getCommands()
 
-const events = getEvents()
+const events = await getEvents()
 
 for (const event of events) {
   client[event.once ? "once" : "on"](event.name, event.execute)
 }
 
-client.login(process.env.BOT_TOKEN)
+await client.login(process.env.BOT_TOKEN)
 
 setupCustom(client)
