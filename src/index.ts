@@ -1,4 +1,4 @@
-import { Client, Collection, GatewayIntentBits } from "discord.js"
+import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
 import "dotenv/config"
 
 import { getCommands, getEvents } from "@utils"
@@ -12,7 +12,12 @@ export class ExtendedClient extends Client {
 }
 
 const client = new ExtendedClient({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+  partials: [Partials.Channel, Partials.Message],
 })
 
 client.commands = getCommands()
@@ -24,3 +29,5 @@ for (const event of events) {
 }
 
 client.login(process.env.BOT_TOKEN)
+
+setupCustom(client)
