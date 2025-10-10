@@ -1,5 +1,5 @@
 import cron from "node-cron"
-import { UselessFact } from "@types"
+import { Fact, UselessFact } from "@types"
 import { ExtendedClient } from "index"
 import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
@@ -9,11 +9,19 @@ export default async (client: ExtendedClient) => {
 
   cron.schedule("0 0 22 * * *", async () => {
     const fact = await getFact()
-    sendFactMessage(fact, channel)
+    const message = await sendFactMessage(fact, channel)
+
+    if (!fact.isReal) {
+      setTimeout(() => message.reply("That was fake 🙂"), 3.6e6) // 1 hour
+    }
   })
 }
 
-const getFact = async (): Promise<UselessFact> => {
+const getFact = async (): Promise<Fact> => {
+  // if (chancePercent(10)) {
+  //   return { text: "fake fact here", isReal: false }
+  // }
+
   const response = await fetch(
     "https://uselessfacts.jsph.pl/api/v2/facts/today",
   )
@@ -22,17 +30,18 @@ const getFact = async (): Promise<UselessFact> => {
     throw new Error(`Response status: ${response.status}`)
   }
 
-  return (await response.json()) as UselessFact
+  const uselessFact = (await response.json()) as UselessFact
+  return {
+    text: uselessFact.text,
+    isReal: true,
+  }
 }
 
-const sendFactMessage = async (
-  fact: UselessFact,
-  channel: SendableChannels,
-) => {
+const sendFactMessage = async (fact: Fact, channel: SendableChannels) => {
   const embed = new EmbedBuilder()
     .setTitle("Fact of the day")
     .setDescription(fact.text)
     .setColor(getRandomColor())
 
-  channel.send({ embeds: [embed] })
+  return channel.send({ embeds: [embed] })
 }
