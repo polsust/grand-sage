@@ -1,0 +1,11 @@
+# docker-compose run --remove-orphans --service-ports app
+services:
+  app:
+    build: .
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+    stdin_open: true
+    tty: true
+    command: pnpm dev
