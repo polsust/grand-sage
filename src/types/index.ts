@@ -5,4 +5,4 @@
 export * from "./command";
 export * from "./customFunction";
 export * from "./event";
-export * from "./uselessFact";
+export * from "./facts";
