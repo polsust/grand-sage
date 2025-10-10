@@ -23,7 +23,7 @@ const init = async (client: Client) => {
 
   for (const [guildId, guild] of client.guilds.cache) {
     const voiceChannelToJoin = await getVoiceChannelToJoin(guild)
-    if (!voiceChannelToJoin) return
+    if (!voiceChannelToJoin) continue
 
     const sound = getRandomSound()
 
