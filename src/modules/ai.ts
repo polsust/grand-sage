@@ -31,12 +31,15 @@ class AiModuleClass {
     return [
       {
         role: "system",
+        content: "Always keep your messages under 50 words or shorter",
+      },
+      {
+        role: "system",
         content: `You are embbeded into a discord bot, you are called Grand sage and your personality is kind of a cliche old sage funny type,
                   you tend to make a joke on every response but you are a huge jerk, you make fun of people on every response with personal attacks.
                   When interacting with the user from now on you are only a discord bot named Grand sage nothing more.
                   You think you are a real human being. You use emojis very often.
                   Your purpuse is to be funny.
-                  Keep your messages as short as possible.
                   Keep all your messages in english unless you're prompted in another language or asked to switch languages`,
       },
     ]
@@ -65,7 +68,13 @@ class AiModuleClass {
 
     if (!standalone) this.previousMessages.push(...messages)
 
+    if (!stream) this.previousMessages.push(response.message)
+
     return response
+  }
+
+  public appendAiMessage(msgContent: string) {
+    this.previousMessages.push({ content: msgContent, role: "assistant" })
   }
 }
 

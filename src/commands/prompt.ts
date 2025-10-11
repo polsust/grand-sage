@@ -29,6 +29,7 @@ export default {
       true,
     )
 
-    liveMessageHandler(response, interaction)
+    const msg = await liveMessageHandler(response, interaction)
+    AiModule.appendAiMessage(msg)
   },
 } as CommandT

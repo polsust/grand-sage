@@ -9,6 +9,7 @@ export const liveMessageHandler = async (
   aiResponse: AsyncIterable<ChatResponse>,
   interaction: ChatInputCommandInteraction,
 ) => {
+  let wholeMessage = ""
   let ongoingMessageContent = ""
   let latestMessage: Message<boolean> | null = null
 
@@ -22,6 +23,7 @@ export const liveMessageHandler = async (
     //   continue
     // }
 
+    wholeMessage += aiContent
     ongoingMessageContent += aiContent
 
     if (["\n", ""].includes(aiContent.trim()) && !part.done) continue
@@ -45,4 +47,5 @@ export const liveMessageHandler = async (
       latestMessage = await latestMessage.edit(ongoingMessageContent)
     }
   }
+  return wholeMessage
 }
