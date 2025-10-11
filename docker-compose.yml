@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=development
       - OLLAMA_HOST=http://ollama:11434
-      - OLLAMA_MODEL=qwen:0.5b
+      - OLLAMA_MODEL=mistral:7b
     stdin_open: true
     tty: true
     depends_on:
@@ -16,6 +16,4 @@ services:
     command: pnpm dev
 
   ollama:
-    build: ./docker/ollama/
-    ports:
-      - "11434:11434"
+    image: ollama/ollama:0.12.4

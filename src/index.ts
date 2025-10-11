@@ -33,4 +33,6 @@ for (const event of events) {
 
 await client.login(process.env.BOT_TOKEN)
 
+await setupAi()
+
 setupCustomFunctions(client)

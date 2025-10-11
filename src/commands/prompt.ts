@@ -19,12 +19,15 @@ export default {
 
     await interaction.deferReply()
 
-    const response = await AiModule.prompt([
-      {
-        role: "user",
-        content: input.value,
-      },
-    ])
+    const response = await AiModule.prompt(
+      [
+        {
+          role: "user",
+          content: input.value,
+        },
+      ],
+      true,
+    )
 
     liveMessageHandler(response, interaction)
   },
