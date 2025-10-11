@@ -1,6 +1,8 @@
 FROM node:24.10 AS BASE
 
-RUN apt update && apt install -y ffmpeg
+RUN apt update && apt install -y ffmpeg tzdata
+
+ENV TZ=Europe/Madrid
 
 RUN npm install -g pnpm
 
