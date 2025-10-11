@@ -54,9 +54,6 @@ class AiModuleClass {
       stream,
     })
 
-    // gotta push the ai responses too!
-    // even if it's standalone users should be able to reply to it so let's store it
-
     if (!standalone) this.previousMessages.push(...messages)
 
     if (!stream) this.previousMessages.push(response.message)
