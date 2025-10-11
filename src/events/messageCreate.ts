@@ -9,7 +9,7 @@ export default createEvent({
   async execute(msg) {
     handlePrivateMsgs(msg)
 
-    if (chancePercent(1)) {
+    if (chancePercent(0.1)) {
       const res = AiModule.prompt(
         [
           {
