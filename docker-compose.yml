@@ -10,10 +10,10 @@ services:
       - .:/app
     environment:
       - OLLAMA_HOST=http://ollama:11434
-      - OLLAMA_MODEL=phi3:3.8b
     depends_on:
       - ollama
     command: ${LAUNCH_CMD}
 
   ollama:
-    image: ollama/ollama:0.12.4
+    build:
+      dockerfile: ./docker/ollama/Dockerfile

@@ -1,17 +1,5 @@
 import { ChatResponse, Message, Ollama } from "ollama"
 
-export const setupAi = async () => {
-  const ollama = new Ollama({ host: process.env.OLLAMA_HOST })
-
-  const modelName = process.env.OLLAMA_MODEL as string
-
-  const modelsList = await ollama.list()
-
-  if (!modelsList.models.find(({ name }) => name == modelName)) {
-    await ollama.pull({ model: modelName })
-  }
-}
-
 class AiModuleClass {
   protected static _instance: AiModuleClass
   protected ollama: Ollama
@@ -56,8 +44,10 @@ class AiModuleClass {
       messages = [...this.personalityPrompt, ...newMessages]
     }
 
+    const model = (await this.ollama.list()).models.at(0)?.name
+
     const response = await this.ollama.chat({
-      model: process.env.OLLAMA_MODEL as string,
+      model: model as string,
       messages,
       // @ts-expect-error this expects a literal true or false and not a boolean
       stream,

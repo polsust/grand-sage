@@ -2,9 +2,12 @@ import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
 
 import { getCommands, getEvents, setupCustomFunctions } from "@utils"
 import { CommandT } from "@types"
-import { setupAi } from "@modules"
 
 console.log("🚀 Starting...")
+
+if (process.env.NODE_ENV === "production") {
+  await import("./scripts/deployCommands")
+}
 
 export class ExtendedClient extends Client {
   public commands = new Collection<string, CommandT>()
@@ -32,7 +35,5 @@ for (const event of events) {
 }
 
 await client.login(process.env.BOT_TOKEN)
-
-await setupAi()
 
 setupCustomFunctions(client)
