@@ -3,6 +3,7 @@ import "dotenv/config"
 
 import { getCommands, getEvents, setupCustomFunctions } from "@utils"
 import { CommandT } from "@types"
+import { setupAi } from "@modules"
 
 console.log("🚀 Starting...")
 
