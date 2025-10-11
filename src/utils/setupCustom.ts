@@ -1,11 +1,11 @@
 import fs from "node:fs"
 import path from "node:path"
-import { ExtendedClient } from "index"
 import { CustomFunctionT } from "@types"
+import { Client } from "discord.js"
 
 const commandsDirPath = path.join(process.cwd(), "src/custom")
 
-export const setupCustom = async (client: ExtendedClient) => {
+export const setupCustomFunctions = async (client: Client) => {
   const files = fs
     .readdirSync(commandsDirPath)
     .filter((file) => file.endsWith(".ts"))

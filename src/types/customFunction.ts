@@ -1,3 +1,3 @@
-import { ExtendedClient } from "index"
+import { Client } from "discord.js"
 
-export type CustomFunctionT = (client: ExtendedClient) => void
+export type CustomFunctionT = (client: Client) => void

@@ -5,10 +5,10 @@ import {
   createAudioResource,
   joinVoiceChannel,
 } from "@discordjs/voice"
+import { chancePercent, getRandomValue } from "@utils"
 import { Client, Guild } from "discord.js"
 import fs from "node:fs"
 import path from "node:path"
-import { chancePercent } from "utils/chance"
 
 export default async (client: Client) => {
   setInterval(() => {
@@ -47,7 +47,7 @@ const getRandomSound = (): AudioResource => {
   const soundsPath = path.join(process.cwd(), "assets/audio/surpriseSounds")
 
   const sounds = fs.readdirSync(soundsPath)
-  const chosenSound = sounds[Math.floor(Math.random() * sounds.length)]
+  const chosenSound = getRandomValue(sounds)
 
   const fullPath = path.join(
     process.cwd(),
@@ -66,7 +66,5 @@ const getVoiceChannelToJoin = async (guild: Guild) => {
 
   if (voiceChannelsWithPeople.size == 0) return
 
-  return voiceChannelsWithPeople.at(
-    Math.floor(Math.random() * voiceChannelsWithPeople.size),
-  )
+  return getRandomValue(voiceChannelsWithPeople)
 }

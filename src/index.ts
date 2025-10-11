@@ -1,9 +1,8 @@
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
 import "dotenv/config"
 
-import { getCommands, getEvents } from "@utils"
+import { getCommands, getEvents, setupCustomFunctions } from "@utils"
 import { CommandT } from "@types"
-import { setupCustom } from "utils/setupCustom"
 
 console.log("🚀 Starting...")
 
@@ -34,4 +33,4 @@ for (const event of events) {
 
 await client.login(process.env.BOT_TOKEN)
 
-setupCustom(client)
+setupCustomFunctions(client)
