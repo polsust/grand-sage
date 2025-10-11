@@ -1,19 +1,40 @@
+import { AiModule } from "@modules"
 import { createEvent } from "@types"
-import { getDefactoChannel } from "@utils"
-import { ChannelType } from "discord.js"
+import { chancePercent, getDefactoChannel } from "@utils"
+import { ChannelType, Message, OmitPartialGroupDMChannel } from "discord.js"
 
 export default createEvent({
   name: "messageCreate",
   once: false,
   async execute(msg) {
-    if (
-      msg.channel.type !== ChannelType.DM ||
-      msg.author.id !== "244134758286753799"
-    )
-      return
+    handlePrivateMsgs(msg)
 
+    if (chancePercent(1)) {
+      const res = AiModule.prompt(
+        [
+          {
+            role: "user",
+            content: `${msg.author} just sent this on discord: ${msg.content}. Make a reply mocking them with personal attacks. Keep the message very short`,
+          },
+        ],
+        false,
+        true,
+      )
+
+      msg.reply((await res).message.content)
+    }
+  },
+})
+
+const handlePrivateMsgs = async (
+  msg: OmitPartialGroupDMChannel<Message<boolean>>,
+) => {
+  if (
+    msg.channel.type == ChannelType.DM &&
+    msg.author.id == "244134758286753799"
+  ) {
     const channel = await getDefactoChannel(msg.client)
 
     channel.send(msg.content)
-  },
-})
+  }
+}
