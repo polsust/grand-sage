@@ -7,14 +7,14 @@ class AiModuleClass {
 
   protected constructor() {
     this.ollama = new Ollama({ host: process.env.OLLAMA_HOST })
-    this.previousMessages.push(...this.setupPrompt())
+    this.previousMessages.push(...this.personalityPrompt())
   }
 
   public static get instance() {
     return this._instance || (this._instance = new this())
   }
 
-  protected setupPrompt(): Message[] {
+  protected personalityPrompt(): Message[] {
     return [
       {
         role: "system",
