@@ -1,5 +1,4 @@
 import { REST, Routes } from "discord.js"
-import "dotenv/config"
 import { getCommands } from "@utils"
 
 const { BOT_TOKEN, BOT_APPLICATION_ID, DEV_SERVER_ID } = process.env
