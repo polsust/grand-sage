@@ -1,5 +1,4 @@
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js"
-import "dotenv/config"
 
 import { getCommands, getEvents, setupCustomFunctions } from "@utils"
 import { CommandT } from "@types"

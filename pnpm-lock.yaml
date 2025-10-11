@@ -23,9 +23,6 @@ importers:
       discord.js:
         specifier: ^14.23.2
         version: 14.23.2
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
       node-cron:
         specifier: ^4.2.1
         version: 4.2.1
@@ -705,10 +702,6 @@ packages:
   discord.js@14.23.2:
     resolution: {integrity: sha512-tU2NFr823X3TXEc8KyR/4m296KLxPai4nirN3q9kHCpY4TKj96n9lHZnyLzRNMui8EbL07jg9hgH2PWWfKMGIg==}
     engines: {node: '>=18'}
-
-  dotenv@16.4.7:
-    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
-    engines: {node: '>=12'}
 
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
@@ -2188,8 +2181,6 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  dotenv@16.4.7: {}
 
   ecc-jsbn@0.1.2:
     dependencies:

@@ -23,7 +23,6 @@
     "@snazzah/davey": "^0.1.7",
     "dayjs": "^1.11.13",
     "discord.js": "^14.23.2",
-    "dotenv": "^16.4.7",
     "node-cron": "^4.2.1",
     "ollama": "^0.5.12",
     "sodium": "^3.0.2",
