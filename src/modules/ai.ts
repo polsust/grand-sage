@@ -4,6 +4,7 @@ class AiModuleClass {
   protected static _instance: AiModuleClass
   protected ollama: Ollama
   protected previousMessages: Message[] = []
+  protected model: string | undefined
 
   protected constructor() {
     this.ollama = new Ollama({ host: process.env.OLLAMA_HOST })
@@ -44,10 +45,10 @@ class AiModuleClass {
       messages = [...this.personalityPrompt, ...newMessages]
     }
 
-    const model = (await this.ollama.list()).models.at(0)?.name
+    this.model = this.model || (await this.ollama.list()).models.at(0)?.name
 
     const response = await this.ollama.chat({
-      model: model as string,
+      model: this.model as string,
       messages,
       // @ts-expect-error this expects a literal true or false and not a boolean
       stream,
