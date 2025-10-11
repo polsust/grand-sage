@@ -37,7 +37,7 @@ const init = async (channel: SendableChannels) => {
 }
 
 const getFact = async (): Promise<Fact> => {
-  if (chancePercent(10)) {
+  if (chancePercent(3)) {
     const file = fs.readFileSync(
       process.cwd() + "/assets/data/fake_facts.json",
       "utf-8",
