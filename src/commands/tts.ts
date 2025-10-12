@@ -59,7 +59,7 @@ const readWord = async (
   audiosFiles: string[],
   audioPlayer: AudioPlayer,
 ) => {
-  let wait: number = 100
+  let pauseBetweenWordsMs: number = 10
   for (let i = 0; i < word.length; i++) {
     const letter: string = word.charAt(i)
     const nextLetter: string = word.charAt(i + 1)
@@ -70,16 +70,16 @@ const readWord = async (
     } else if (audioExists(letter, audiosFiles)) {
       await playAudio(letter, "", "", audioPlayer)
     } else if (letter === ",") {
-      wait = 500
+      pauseBetweenWordsMs = 500
     } else if (letter === ".") {
-      wait = 700
+      pauseBetweenWordsMs = 700
     }
   }
 
   return new Promise((resolve) => {
     setTimeout(async () => {
       resolve(true)
-    }, wait)
+    }, pauseBetweenWordsMs)
   })
 }
 
