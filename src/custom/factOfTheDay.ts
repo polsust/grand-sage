@@ -24,6 +24,7 @@ const init = async (channel: SendableChannels) => {
         {
           role: "user",
           content: `I made you send this incorrect FACT OF THE DAY: ${fact.text}
+                    Tell everyone the fact was incorrect.
                     Now you I want you to make up a silly excuse for having sent this fact don't take responsibility but first explain that it was incorrect.
                     Keep the message short (under 80 characters). End it with an emoji.`,
         },
