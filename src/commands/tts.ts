@@ -93,7 +93,7 @@ const playAudio = async (
   previousLetter: string = "",
   audioPlayer: AudioPlayer,
 ) => {
-  console.log(previousLetter + letter + nextLetter)
+  // console.log(previousLetter + letter + nextLetter)
 
   const audioResource = createAudioResource(
     path.join(
