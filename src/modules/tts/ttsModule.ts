@@ -4,7 +4,7 @@ import { HumanSpeechConfig, HumanSpeechModule } from "modules/humanSpeech"
 type TtsConfig = Partial<HumanSpeechConfig & AiSpeechConfig>
 
 export class TtsModule {
-  static async generateSpeech(text: string, agent: string, config: TtsConfig) {
+  static async generateSpeech(text: string, agent: string, config?: TtsConfig) {
     let audio = null
 
     const engine = agent.startsWith("ai") ? "ai" : "human"
