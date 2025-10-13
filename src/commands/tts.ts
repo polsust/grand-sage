@@ -1,4 +1,8 @@
-import { getTtsOption } from "@discord"
+import {
+  getTtsPersonOption,
+  getTtsPitchOption,
+  getTtsSpeedOption,
+} from "@discord"
 import { TtsModule } from "@modules"
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
 import { audioPlayingHandler } from "discord/audioPlayingHandler"
@@ -13,20 +17,31 @@ export default {
         .setDescription("Text to speech")
         .setRequired(true),
     )
-    .addStringOption((o) => getTtsOption(o)),
+    .addStringOption((o) => getTtsPersonOption(o))
+    .addStringOption((o) => getTtsSpeedOption(o))
+    .addStringOption((o) => getTtsPitchOption(o)),
   async execute(interaction: ChatInputCommandInteraction) {
     const input = interaction.options.get("input") as { value: string }
     const ttsPerson = (interaction.options.get("tts_person") as {
       value: string
     }) || { value: "ai" }
+    const speed = interaction.options.get("tts_speed") as
+      | { value?: number }
+      | undefined
+    const pitch = interaction.options.get("tts_pitch") as
+      | { value?: number }
+      | undefined
+
+    interaction.deferReply()
 
     const audioReadable = await TtsModule.generateSpeech(
       input.value,
       ttsPerson.value,
+      { speed: speed?.value, pitch: pitch?.value },
     )
 
     audioPlayingHandler(interaction, audioReadable)
 
-    interaction.reply(input.value)
+    interaction.editReply(input.value)
   },
 }
