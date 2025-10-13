@@ -8,6 +8,7 @@ services:
       - path: .env.${ENV} # ENV = dev or prod
     volumes:
       - .:/app
+      - /app/node_modules
     environment:
       - OLLAMA_HOST=http://ollama:11434
       - AI_VOICE_HOST=http://kokoro:8880
