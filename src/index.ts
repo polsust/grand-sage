@@ -5,10 +5,6 @@ import { CommandT } from "@types"
 
 console.log("🚀 Starting...")
 
-if (process.env.NODE_ENV === "production") {
-  await import("./scripts/deployCommands")
-}
-
 export class ExtendedClient extends Client {
   public commands = new Collection<string, CommandT>()
 }
