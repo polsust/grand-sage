@@ -10,10 +10,17 @@ services:
       - .:/app
     environment:
       - OLLAMA_HOST=http://ollama:11434
+      - AI_VOICE_HOST=http://kokoro:8880
     depends_on:
       - ollama
+      - kokoro
     command: ${LAUNCH_CMD}
 
   ollama:
     build:
       dockerfile: ./docker/ollama/Dockerfile
+
+  kokoro:
+    image: ghcr.io/remsky/kokoro-fastapi-cpu
+    ports:
+      - 8880:8880
