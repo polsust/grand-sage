@@ -108,5 +108,6 @@ export class HumanSpeechModule {
       .map((char) => accentsMap[char] || char) // replace accented vowels
       .join("")
       .replace(/[^a-zA-Z0-9\sñÑ]/g, "") // remove punctuation except ñ
+      .toLowerCase()
   }
 }
