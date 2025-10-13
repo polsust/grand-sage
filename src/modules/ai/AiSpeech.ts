@@ -2,8 +2,8 @@ import ky from "ky"
 import { Readable } from "stream"
 
 export type AiSpeechConfig = {
-  voice: string
-  lang_code: string
+  voice?: string
+  lang_code?: string
 }
 
 export class AiSpeechModule {

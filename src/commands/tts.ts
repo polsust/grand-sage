@@ -16,7 +16,7 @@ export default {
     .addStringOption((o) => getTtsOption(o)),
   async execute(interaction: ChatInputCommandInteraction) {
     const input = interaction.options.get("input") as { value: string }
-    const ttsPerson = (interaction.options.get("person") as {
+    const ttsPerson = (interaction.options.get("tts_person") as {
       value: string
     }) || { value: "ai" }
 

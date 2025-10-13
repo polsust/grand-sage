@@ -8,7 +8,7 @@ export const getTtsOption = (
   const humans = fs.readdirSync(path.join(process.cwd(), "/assets/audio/tts/"))
 
   return option
-    .setName("person")
+    .setName("tts_person")
     .setDescription("Read out loud")
     .setChoices([
       {
