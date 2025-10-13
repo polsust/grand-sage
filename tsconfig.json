@@ -14,7 +14,8 @@
       "@scripts/*": ["./scripts/*"],
       "@utils": ["./utils/index.ts"],
       "@types": ["./types/index.ts"],
-      "@modules": ["./modules/index.ts"]
+      "@modules": ["./modules/index.ts"],
+      "@discord": ["./discord/index.ts"]
     }
   },
   "include": ["src/**/*"],

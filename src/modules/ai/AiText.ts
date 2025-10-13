@@ -1,7 +1,7 @@
 import { ChatResponse, Message, Ollama } from "ollama"
 
-class AiModuleClass {
-  protected static _instance: AiModuleClass
+class AiTextModuleClass {
+  protected static _instance: AiTextModuleClass
   protected ollama: Ollama
   protected previousMessages: Message[] = []
   protected model: string | undefined
@@ -67,4 +67,4 @@ class AiModuleClass {
 }
 
 // Use the singleton
-export const AiModule = AiModuleClass.instance
+export const AiTextModule = AiTextModuleClass.instance

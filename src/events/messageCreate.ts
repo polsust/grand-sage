@@ -1,4 +1,4 @@
-import { AiModule } from "@modules"
+import { AiTextModule } from "@modules"
 import { createEvent } from "@types"
 import { chancePercent, getDefactoChannel } from "@utils"
 import { ChannelType, Message, OmitPartialGroupDMChannel } from "discord.js"
@@ -10,7 +10,7 @@ export default createEvent({
     handlePrivateMsgs(msg)
 
     if (chancePercent(0.1)) {
-      const res = AiModule.prompt(
+      const res = AiTextModule.prompt(
         [
           {
             role: "user",

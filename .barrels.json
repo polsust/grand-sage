@@ -1,3 +1,11 @@
 {
-  "directory": ["./src/utils/", "./src/types/", "./src/modules/"]
+  "directory": [
+    "./src/utils/",
+    "./src/types/",
+    "./src/modules/",
+    "./src/modules/ai/",
+    "./src/modules/humanSpeech/",
+    "./src/modules/tts/",
+    "./src/discord/"
+  ]
 }

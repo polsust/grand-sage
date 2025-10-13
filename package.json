@@ -11,6 +11,7 @@
     "dev": "tsx watch ./src/index.ts",
     "start": "tsx ./src/index.ts",
     "lint": "eslint .",
+    "ts-check": "tsc --noEmit",
     "deploy-commands": "tsx ./src/scripts/deployCommands.ts",
     "generate-barrels": "barrelsby --delete -c ./.barrels.json"
   },
@@ -23,6 +24,8 @@
     "@snazzah/davey": "^0.1.7",
     "dayjs": "^1.11.13",
     "discord.js": "^14.23.2",
+    "ffmpeg-simplified": "^2.0.2",
+    "ky": "^1.11.0",
     "node-cron": "^4.2.1",
     "ollama": "^0.5.12",
     "sodium": "^3.0.2",

@@ -5,7 +5,7 @@ import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
 import { chancePercent, getRandomValue } from "utils/chance"
 import fs from "node:fs"
-import { AiModule } from "@modules"
+import { AiTextModule } from "@modules"
 
 export default async (client: ExtendedClient) => {
   const channel = await getDefactoChannel(client)
@@ -19,7 +19,7 @@ const init = async (channel: SendableChannels) => {
   const message = await sendFactMessage(fact, channel)
 
   if (!fact.isReal) {
-    const res = await AiModule.prompt(
+    const res = await AiTextModule.prompt(
       [
         {
           role: "user",
