@@ -26,6 +26,7 @@ export default {
     .addStringOption(getTtsPersonOption)
     .addStringOption((o) => getTtsSpeedOption(o))
     .addStringOption((o) => getTtsPitchOption(o)),
+
   async execute(interaction: ChatInputCommandInteraction) {
     const input = interaction.options.get("input") as { value: string }
     const ttsPerson = interaction.options.get("tts_person") as {
@@ -44,7 +45,7 @@ export default {
       [
         {
           role: "user",
-          content: input.value,
+          content: `${interaction.user.username} sent you the following message: ${input.value}`,
         },
       ],
       false,
