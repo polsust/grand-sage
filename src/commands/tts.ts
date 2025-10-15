@@ -49,7 +49,7 @@ export default {
     audioPlayingHandler(interaction, audioReadable)
 
     const embed = new EmbedBuilder()
-      .setTitle(`Text to speech as ${ttsPerson.value || "AI"}`)
+      .setTitle(`TEXT TO SPEECH as ${ttsPerson.value || "AI"}`)
       .setDescription(input.value)
       .setColor(Colors.Purple)
 
