@@ -1,5 +1,5 @@
 import { createEvent } from "@types"
-import { MessageFlags } from "discord.js"
+import { Colors, EmbedBuilder } from "discord.js"
 import { ExtendedClient } from "index"
 
 export default createEvent({
@@ -22,17 +22,23 @@ export default createEvent({
       await command.execute(interaction)
     } catch (error) {
       console.error(error)
+
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({
-          content: "There was an error while executing this command!",
-          flags: MessageFlags.Ephemeral,
+          embeds: [getErrorEmbed(error as Error)],
         })
       } else {
         await interaction.reply({
-          content: "There was an error while executing this command!",
-          flags: MessageFlags.Ephemeral,
+          embeds: [getErrorEmbed(error as Error)],
         })
       }
     }
   },
 })
+
+const getErrorEmbed = (error: Error) => {
+  return new EmbedBuilder()
+    .setTitle("An error has occurred while running this command!")
+    .setDescription(error?.message)
+    .setColor(Colors.Red)
+}
