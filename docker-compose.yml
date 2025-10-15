@@ -1,5 +1,6 @@
 services:
   app:
+    restart: unless-stopped
     build:
       context: .
       dockerfile: ./docker/node/Dockerfile
@@ -18,10 +19,12 @@ services:
     command: ${LAUNCH_CMD}
 
   ollama:
+    restart: unless-stopped
     build:
       dockerfile: ./docker/ollama/Dockerfile
 
   kokoro:
+    restart: unless-stopped
     image: ghcr.io/remsky/kokoro-fastapi-cpu
     ports:
       - 8880:8880
