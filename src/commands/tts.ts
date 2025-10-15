@@ -32,7 +32,7 @@ export default {
       | { value?: number }
       | undefined
 
-    interaction.deferReply()
+    const deferedReply = interaction.deferReply()
 
     const audioReadable = await TtsModule.generateSpeech(
       input.value,
@@ -42,6 +42,7 @@ export default {
 
     audioPlayingHandler(interaction, audioReadable)
 
+    await deferedReply
     interaction.editReply(input.value)
   },
 }
