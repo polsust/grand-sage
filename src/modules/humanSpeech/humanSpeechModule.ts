@@ -8,8 +8,8 @@ import { log } from "console"
 export type HumanSpeechConfig = { human: string }
 
 export class HumanSpeechModule {
-  static dotPause = this.generateOrGetSilentAudioFile(700)
-  static commaPause = this.generateOrGetSilentAudioFile(500)
+  static dotPause = this.generateOrGetSilentAudioFile(1000)
+  static commaPause = this.generateOrGetSilentAudioFile(600)
   static betweenWordsPause = this.generateOrGetSilentAudioFile(30)
 
   static baseAudioPath = path.join(process.cwd(), `assets/audio/tts`)
