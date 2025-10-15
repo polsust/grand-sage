@@ -4,7 +4,12 @@ import {
   getTtsSpeedOption,
 } from "@discord"
 import { TtsModule } from "@modules"
-import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js"
+import {
+  ChatInputCommandInteraction,
+  Colors,
+  EmbedBuilder,
+  SlashCommandBuilder,
+} from "discord.js"
 import { audioPlayingHandler } from "discord/audioPlayingHandler"
 
 export default {
@@ -22,9 +27,10 @@ export default {
     .addStringOption((o) => getTtsPitchOption(o)),
   async execute(interaction: ChatInputCommandInteraction) {
     const input = interaction.options.get("input") as { value: string }
-    const ttsPerson = (interaction.options.get("tts_person") as {
+    const ttsPerson = interaction.options.get("tts_person") as {
       value: string
-    }) || { value: "ai" }
+      name: string
+    }
     const speed = interaction.options.get("tts_speed") as
       | { value?: number }
       | undefined
@@ -36,13 +42,18 @@ export default {
 
     const audioReadable = await TtsModule.generateSpeech(
       input.value,
-      ttsPerson.value,
+      (ttsPerson?.value as string) || "ai",
       { speed: speed?.value, pitch: pitch?.value },
     )
 
     audioPlayingHandler(interaction, audioReadable)
 
+    const embed = new EmbedBuilder()
+      .setTitle(`Text to speech as ${ttsPerson.value || "AI"}`)
+      .setDescription(input.value)
+      .setColor(Colors.Purple)
+
     await deferedReply
-    interaction.editReply(input.value)
+    interaction.editReply({ embeds: [embed] })
   },
 }
