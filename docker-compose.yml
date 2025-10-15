@@ -25,6 +25,6 @@ services:
 
   kokoro:
     restart: unless-stopped
-    image: ghcr.io/remsky/kokoro-fastapi-cpu
+    image: ghcr.io/remsky/kokoro-fastapi-cpu:v0.2.4
     ports:
       - 8880:8880
