@@ -6,3 +6,4 @@ export * from "./command";
 export * from "./customFunction";
 export * from "./event";
 export * from "./facts";
+export * from "./jokeApi";
