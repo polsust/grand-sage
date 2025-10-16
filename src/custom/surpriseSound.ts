@@ -1,3 +1,4 @@
+import cron from "node-cron"
 import {
   AudioPlayerStatus,
   AudioResource,
@@ -11,11 +12,11 @@ import fs from "node:fs"
 import path from "node:path"
 
 export default async (client: Client) => {
-  setInterval(() => {
-    if (chancePercent(3)) {
+  cron.schedule("1 * * * * *", async () => {
+    if (chancePercent(0.05)) {
       init(client)
     }
-  }, 3.6e6) // every hour
+  })
 }
 
 const init = async (client: Client) => {
