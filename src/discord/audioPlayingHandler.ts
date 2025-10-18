@@ -14,16 +14,15 @@ export const audioPlayingHandler = (
 
   const voiceChannel = interaction.member.voice.channel
 
-  if (!voiceChannel) return
-
   const audioPlayer = createAudioPlayer()
-
-  const voiceConnection = joinVoiceChannel({
-    channelId: voiceChannel.id,
-    guildId: voiceChannel.guildId,
-    adapterCreator: voiceChannel.guild.voiceAdapterCreator,
-  })
-  voiceConnection.subscribe(audioPlayer)
+  if (voiceChannel) {
+    const voiceConnection = joinVoiceChannel({
+      channelId: voiceChannel.id,
+      guildId: voiceChannel.guildId,
+      adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+    })
+    voiceConnection.subscribe(audioPlayer)
+  }
 
   audioPlayer.play(createAudioResource(audioReadable))
 }
