@@ -30,7 +30,7 @@ export default {
     const ttsPerson = interaction.options.get("tts_person") as {
       value: string
       name: string
-    }
+    } | null
     const speed = interaction.options.get("tts_speed") as
       | { value?: number }
       | undefined
@@ -42,14 +42,14 @@ export default {
 
     const audioReadable = await TtsModule.generateSpeech(
       input.value,
-      (ttsPerson?.value as string) || "ai",
+      (ttsPerson?.value as string) || "pol",
       { speed: speed?.value, pitch: pitch?.value },
     )
 
     audioPlayingHandler(interaction, audioReadable)
 
     const embed = new EmbedBuilder()
-      .setTitle(`TEXT TO SPEECH as ${ttsPerson.value || "AI"}`)
+      .setTitle(`TEXT TO SPEECH as ${ttsPerson?.value || "pol"}`)
       .setDescription(input.value)
       .setColor(Colors.Purple)
 
