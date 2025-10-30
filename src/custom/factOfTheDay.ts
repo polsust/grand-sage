@@ -5,7 +5,6 @@ import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
 import { chancePercent, getRandomValue } from "utils/chance"
 import fs from "node:fs"
-import { AiTextModule } from "@modules"
 
 export default async (client: ExtendedClient) => {
   const channel = await getDefactoChannel(client)
@@ -19,21 +18,24 @@ const init = async (channel: SendableChannels) => {
   const message = await sendFactMessage(fact, channel)
 
   if (!fact.isReal) {
-    const res = await AiTextModule.prompt(
-      [
-        {
-          role: "user",
-          content: `I made you send this incorrect FACT OF THE DAY: ${fact.text}
-                    Tell everyone the fact was incorrect.
-                    Now you I want you to make up a silly excuse for having sent this fact don't take responsibility but first explain that it was incorrect.
-                    Keep the message short (under 80 characters). End it with an emoji.`,
-        },
-      ],
-      false,
-      true,
-    )
+    // const res = await AiTextModule.prompt(
+    //   [
+    //     {
+    //       role: "user",
+    //       content: `I made you send this incorrect FACT OF THE DAY: ${fact.text}
+    //                 Tell everyone the fact was incorrect.
+    //                 Now you I want you to make up a silly excuse for having sent this fact don't take responsibility but first explain that it was incorrect.
+    //                 Keep the message short (under 80 characters). End it with an emoji.`,
+    //     },
+    //   ],
+    //   false,
+    //   true,
+    // )
 
-    setTimeout(() => message.reply(res.message.content), 3.6e6 * 3) //3.6e6 1 hour
+    setTimeout(
+      () => message.reply("My mistake! That one is incorrect 😛"),
+      3.6e6 * 3,
+    ) //3.6e6 1 hour
   }
 }
 
