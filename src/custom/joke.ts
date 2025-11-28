@@ -6,7 +6,7 @@ import { ExtendedClient } from "index"
 import ky from "ky"
 
 export default async (client: ExtendedClient) => {
-  cron.schedule("30 * * * * *", async () => {
+  cron.schedule("* 30 * * * *", async () => {
     if (chancePercent(0.0167)) {
       init(client)
     }
