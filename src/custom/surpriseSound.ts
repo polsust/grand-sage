@@ -12,7 +12,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 export default async (client: Client) => {
-  cron.schedule("* 30 * * * *", async () => {
+  cron.schedule("1 30 * * * *", async () => {
     if (chancePercent(0.05)) {
       init(client)
     }
