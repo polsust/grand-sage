@@ -1,4 +1,4 @@
-FROM node:24.10 AS BASE
+FROM node:20 AS BASE
 
 RUN apt update && apt install -y ffmpeg tzdata
 
