@@ -3,8 +3,6 @@ import { Fact, UselessFact } from "@types"
 import { ExtendedClient } from "index"
 import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
-import { chancePercent, getRandomValue } from "utils/chance"
-import fs from "node:fs"
 
 export default async (client: ExtendedClient) => {
   const channel = await getDefactoChannel(client)
@@ -40,17 +38,17 @@ const init = async (channel: SendableChannels) => {
 }
 
 const getFact = async (): Promise<Fact> => {
-  if (chancePercent(1)) {
-    const file = fs.readFileSync(
-      process.cwd() + "/assets/data/fake_facts.json",
-      "utf-8",
-    )
-    const fakeFacts: string[] = JSON.parse(file)
-
-    const fakeFact = getRandomValue(fakeFacts)
-
-    return { text: fakeFact, isReal: false }
-  }
+  // if (chancePercent(1)) {
+  //   const file = fs.readFileSync(
+  //     process.cwd() + "/assets/data/fake_facts.json",
+  //     "utf-8",
+  //   )
+  //   const fakeFacts: string[] = JSON.parse(file)
+  //
+  //   const fakeFact = getRandomValue(fakeFacts)
+  //
+  //   return { text: fakeFact, isReal: false }
+  // }
 
   const response = await fetch(
     "https://uselessfacts.jsph.pl/api/v2/facts/today",
