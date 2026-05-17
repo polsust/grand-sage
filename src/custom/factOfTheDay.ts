@@ -3,6 +3,7 @@ import { Fact, UselessFact } from "@types"
 import { ExtendedClient } from "index"
 import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
+import ky from "ky"
 
 export default async (client: ExtendedClient) => {
   const channel = await getDefactoChannel(client)
@@ -50,7 +51,7 @@ const getFact = async (): Promise<Fact> => {
   //   return { text: fakeFact, isReal: false }
   // }
 
-  const response = await fetch(
+  const response = await ky.get(
     "https://uselessfacts.jsph.pl/api/v2/facts/today",
   )
 
