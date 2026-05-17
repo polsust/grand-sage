@@ -1,5 +1,5 @@
 import cron from "node-cron"
-import { Fact, UselessFact } from "@types"
+import { Fact, FactOfTheDayResponse } from "@types"
 import { ExtendedClient } from "index"
 import { EmbedBuilder, SendableChannels } from "discord.js"
 import { getDefactoChannel, getRandomColor } from "@utils"
@@ -38,7 +38,7 @@ const init = async (channel: SendableChannels) => {
   }
 }
 
-const getFact = async (): Promise<Fact> => {
+export const getFact = async (): Promise<Fact> => {
   // if (chancePercent(1)) {
   //   const file = fs.readFileSync(
   //     process.cwd() + "/assets/data/fake_facts.json",
@@ -51,17 +51,20 @@ const getFact = async (): Promise<Fact> => {
   //   return { text: fakeFact, isReal: false }
   // }
 
-  const response = await ky.get(
-    "https://uselessfacts.jsph.pl/api/v2/facts/today",
+  const response = await ky.get<FactOfTheDayResponse>(
+    "https://api.api-ninjas.com/v1/factoftheday",
+    {
+      headers: { "x-api-key": process.env.API_NINJAS_KEY },
+    },
   )
 
   if (!response.ok) {
     throw new Error(`Response status: ${response.status}`)
   }
 
-  const uselessFact = (await response.json()) as UselessFact
+  const factOfTheDay = await response.json()
   return {
-    text: uselessFact.text,
+    text: factOfTheDay[0].fact,
     isReal: true,
   }
 }
