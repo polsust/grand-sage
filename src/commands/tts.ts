@@ -42,14 +42,14 @@ export default {
 
     const audioReadable = await TtsModule.generateSpeech(
       input.value,
-      (ttsPerson?.value as string) || "pol",
+      (ttsPerson?.value as string) || "ai",
       { speed: speed?.value, pitch: pitch?.value },
     )
 
     audioPlayingHandler(interaction, audioReadable)
 
     const embed = new EmbedBuilder()
-      .setTitle(`TEXT TO SPEECH as ${ttsPerson?.value || "pol"}`)
+      .setTitle(`TEXT TO SPEECH as ${ttsPerson?.value || "ai"}`)
       .setDescription(input.value)
       .setColor(Colors.Purple)
 
