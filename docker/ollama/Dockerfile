@@ -1,4 +1,4 @@
-FROM ollama/ollama:0.30.0
+FROM ollama/ollama:latest
 
 ARG MODEL=gemma4:e2b
 
