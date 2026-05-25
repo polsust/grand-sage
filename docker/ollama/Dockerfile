@@ -1,4 +1,4 @@
-FROM ollama/ollama:0.12.5
+FROM ollama/ollama:0.30.0-rc25-rocm
 
 ARG MODEL=gemma4:e2b
 
