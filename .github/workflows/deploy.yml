@@ -21,6 +21,6 @@ jobs:
           script: |
             cd ~/grand-sage/
             git pull
-            docker compose build app
+            docker compose build
             docker compose up -d
             docker compose run --rm --no-deps app pnpm run deploy-commands
