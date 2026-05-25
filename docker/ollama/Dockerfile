@@ -1,6 +1,6 @@
 FROM ollama/ollama:0.12.5
 
-ARG MODEL=gemma3:1b
+ARG MODEL=gemma4:e2b
 
 # Start server in background
 RUN ollama serve & \
