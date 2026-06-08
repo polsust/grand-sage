@@ -1,6 +1,5 @@
-import { AiTextModule } from "@modules"
 import { createEvent } from "@types"
-import { chancePercent, getDefactoChannel } from "@utils"
+import { getDefactoChannel } from "@utils"
 import { ChannelType, Message, OmitPartialGroupDMChannel } from "discord.js"
 
 export default createEvent({
@@ -8,21 +7,6 @@ export default createEvent({
   once: false,
   async execute(msg) {
     handlePrivateMsgs(msg)
-
-    if (chancePercent(0.1)) {
-      const res = AiTextModule.prompt(
-        [
-          {
-            role: "user",
-            content: `${msg.author} just sent this on discord: ${msg.content}. Make a reply mocking them with personal attacks. Keep the message very short`,
-          },
-        ],
-        false,
-        true,
-      )
-
-      msg.reply((await res).message.content)
-    }
   },
 })
 
